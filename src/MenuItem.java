@@ -38,4 +38,15 @@ public class MenuItem {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                ", price=" + price +
+                ", stock=" + stock +
+                '}';
+    }
 }
