@@ -86,7 +86,7 @@ public class OrderService {
 
         for (Order o : orders.values()) {
             System.out.println(
-                    "Order " + o.getId() +
+                    "Order: " + o.getId() +
                     "Table:" + o.getTableNumber() +
                     "Status:" + o.getStatus()
             );
