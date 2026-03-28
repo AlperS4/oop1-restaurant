@@ -32,7 +32,7 @@ public class TableService {
 
         for (Table t : tables.values()) {
             System.out.println(
-                    "Table " + t.getNumber() +
+                    "Table: " + t.getNumber() +
                     "Seats:" + t.getSeats() +
                     "Status:" + t.getStatus()
             );
