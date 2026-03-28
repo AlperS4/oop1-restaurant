@@ -36,6 +36,14 @@ public class Order {
         items.add(new OrderItem(item, quantity));
     }
 
+    public void close() {
+        status = OrderStatus.PAID;
+    }
+
+    public void cancel() {
+        status = OrderStatus.CANCELED;
+    }
+
     public double getTotal() {
 
         double total = 0;
