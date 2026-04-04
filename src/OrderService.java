@@ -92,4 +92,8 @@ public class OrderService {
             );
         }
     }
+
+    public Collection<Order> getAllOrders() {
+        return orders.values();
+    }
 }
