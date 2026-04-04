@@ -33,6 +33,12 @@ public class Order {
     }
 
     public void addItem(MenuItem item, int quantity) {
+
+        if (item == null) {
+            System.out.println("Item not found");
+            return;
+        }
+
         items.add(new OrderItem(item, quantity));
     }
 
