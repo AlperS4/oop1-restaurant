@@ -1,3 +1,5 @@
+package basis;
+
 public class OrderItem {
 
     private MenuItem item;

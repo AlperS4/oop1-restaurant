@@ -1,3 +1,8 @@
+package service;
+
+import basis.MenuItem;
+import exeption.ItemNotFoundException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +29,12 @@ public class MenuService {
     }
 
     public MenuItem getItem(int id) {
-        return menu.get(id);
+
+        MenuItem item = menu.get(id);
+        if (item == null) {
+            throw new ItemNotFoundException("Item not found");
+        }
+        return item;
     }
 
     public void printMenu() {

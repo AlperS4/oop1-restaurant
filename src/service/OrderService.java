@@ -1,3 +1,11 @@
+package service;
+
+import basis.Order;
+import basis.Table;
+import enums.OrderStatus;
+import enums.TableStatus;
+import exeption.OrderNotFoundException;
+
 import java.util.*;
 
 public class OrderService {
@@ -17,7 +25,7 @@ public class OrderService {
             if (o.getTableNumber() == tableNumber &&
                 o.getStatus() == OrderStatus.OPEN) {
 
-                System.out.println("Table already has active order");
+                System.out.println("basis.Table already has active order");
                 return null;
             }
         }
@@ -25,7 +33,7 @@ public class OrderService {
         Table table = tableService.getTable(tableNumber);
 
         if (table == null) {
-            System.out.println("Table not found");
+            System.out.println("basis.Table not found");
             return null;
         }
 
@@ -34,13 +42,18 @@ public class OrderService {
         Order order = new Order(nextId++, tableNumber);
         orders.put(order.getId(), order);
 
-        System.out.println("Order " + order.getId() + " opened");
+        System.out.println("basis.Order " + order.getId() + " opened");
 
         return order;
     }
 
     public Order getOrder(int id) {
-        return orders.get(id);
+
+        Order order = orders.get(id);
+        if (order == null) {
+            throw new OrderNotFoundException("Order not found");
+        }
+        return order;
     }
 
     public void closeOrder(int id) {
@@ -48,7 +61,7 @@ public class OrderService {
         Order order = orders.get(id);
 
         if (order == null) {
-            System.out.println("Order not found");
+            System.out.println("basis.Order not found");
             return;
         }
 
@@ -57,7 +70,7 @@ public class OrderService {
         Table table = tableService.getTable(order.getTableNumber());
         table.setStatus(TableStatus.FREE);
 
-        System.out.println("Order closed");
+        System.out.println("basis.Order closed");
     }
 
     public void cancelOrder(int id) {
@@ -65,7 +78,7 @@ public class OrderService {
         Order order = orders.get(id);
 
         if (order == null) {
-            System.out.println("Order not found");
+            System.out.println("basis.Order not found");
             return;
         }
 
@@ -74,7 +87,7 @@ public class OrderService {
         Table table = tableService.getTable(order.getTableNumber());
         table.setStatus(TableStatus.FREE);
 
-        System.out.println("Order canceled");
+        System.out.println("basis.Order canceled");
     }
 
     public void printOrders() {
@@ -86,8 +99,8 @@ public class OrderService {
 
         for (Order o : orders.values()) {
             System.out.println(
-                    "Order: " + o.getId() +
-                    "Table:" + o.getTableNumber() +
+                    "basis.Order: " + o.getId() +
+                    "basis.Table:" + o.getTableNumber() +
                     "Status:" + o.getStatus()
             );
         }

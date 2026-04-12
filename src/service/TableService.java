@@ -1,3 +1,8 @@
+package service;
+
+import basis.Table;
+import exeption.TableNotFoundException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +17,7 @@ public class TableService {
     public void removeTable(int number) {
 
         if (!tables.containsKey(number)) {
-            System.out.println("Table not found");
+            System.out.println("basis.Table not found");
             return;
         }
 
@@ -20,7 +25,12 @@ public class TableService {
     }
 
     public Table getTable(int number) {
-        return tables.get(number);
+
+        Table table = tables.get(number);
+        if (table == null) {
+            throw new TableNotFoundException("Table not found");
+        }
+        return table;
     }
 
     public void printTables() {
@@ -32,7 +42,7 @@ public class TableService {
 
         for (Table t : tables.values()) {
             System.out.println(
-                    "Table: " + t.getNumber() +
+                    "basis.Table: " + t.getNumber() +
                     "Seats:" + t.getSeats() +
                     "Status:" + t.getStatus()
             );

@@ -1,3 +1,6 @@
+package basis;
+
+import enums.Category;
 
 public class MenuItem {
 
@@ -41,7 +44,7 @@ public class MenuItem {
 
     @Override
     public String toString() {
-        return "MenuItem{" +
+        return "basis.MenuItem{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", category=" + category +

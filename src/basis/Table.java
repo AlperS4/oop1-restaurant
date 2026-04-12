@@ -1,3 +1,7 @@
+package basis;
+
+import enums.TableStatus;
+
 public class Table {
 
     private int number;
