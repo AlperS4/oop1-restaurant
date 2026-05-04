@@ -36,6 +36,15 @@ public class Order {
         return items;
     }
 
+    public void removeItem(int itemId) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getItem().getId() == itemId) {
+                items.remove(i);
+                break;
+            }
+        }
+    }
+
     public void addItem(MenuItem item, int quantity) {
 
         if (item == null) {

@@ -1,6 +1,8 @@
 package file;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileManager {
@@ -20,11 +22,12 @@ public class FileManager {
                 file.createNewFile();
             }
 
-            fileData.setFile(path);
+            fileData.setFilePath(path);
+            fileData.setLoaded(true);
 
-            System.out.println("Successfully opened " + file.getName());
+            System.out.println("Successfully opened " + path);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Error opening file");
         }
     }
@@ -44,11 +47,16 @@ public class FileManager {
     public void save() {
 
         if (!fileData.isLoaded()) {
-            System.out.println("No file is open");
+            System.out.println("No file opened");
             return;
         }
 
-        System.out.println("Successfully saved " + fileData.getFilePath());
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileData.getFilePath()))) {
+            System.out.println("Successfully saved");
+
+        } catch (Exception e) {
+            System.out.println("Error saving file");
+        }
     }
 
     public void saveAs(String path) {
@@ -58,8 +66,7 @@ public class FileManager {
             return;
         }
 
-        fileData.setFile(path);
-
+        fileData.setFilePath(path);
         System.out.println("Successfully saved " + path);
     }
 }

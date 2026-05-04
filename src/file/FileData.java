@@ -2,24 +2,27 @@ package file;
 
 public class FileData {
 
-    private String filePath;
     private boolean loaded;
+    private String filePath;
 
     public boolean isLoaded() {
         return loaded;
     }
 
-    public void setFile(String path) {
-        this.filePath = path;
-        this.loaded = true;
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
     }
 
     public String getFilePath() {
         return filePath;
     }
 
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     public void clear() {
-        filePath = null;
-        loaded = false;
+        this.filePath = null;
+        this.loaded = false;
     }
 }
