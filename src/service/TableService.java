@@ -11,17 +11,25 @@ public class TableService {
     private Map<Integer, Table> tables = new HashMap<>();
 
     public void addTable(int number, int seats) {
+
+        if (tables.containsKey(number)) {
+            System.out.println("Table already exists");
+            return;
+        }
+
         tables.put(number, new Table(number, seats));
+        System.out.println("Table added");
     }
 
     public void removeTable(int number) {
 
         if (!tables.containsKey(number)) {
-            System.out.println("basis.Table not found");
+            System.out.println("Table not found");
             return;
         }
 
         tables.remove(number);
+        System.out.println("Table removed");
     }
 
     public Table getTable(int number) {
@@ -42,10 +50,9 @@ public class TableService {
 
         for (Table t : tables.values()) {
             System.out.println(
-                    "basis.Table: " + t.getNumber() +
+                    "Table: " + t.getNumber() +
                     "Seats:" + t.getSeats() +
-                    "Status:" + t.getStatus()
-            );
+                    "Status:" + t.getStatus());
         }
     }
 }

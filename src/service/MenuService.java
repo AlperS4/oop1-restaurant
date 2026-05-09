@@ -15,7 +15,13 @@ public class MenuService {
     }
 
     public void addItem(MenuItem item) {
+
+        if (menu.containsKey(item.getId())) {
+            System.out.println("Item already exists");
+            return;
+        }
         menu.put(item.getId(), item);
+        System.out.println("Item added");
     }
 
     public void removeItem(int id) {
@@ -24,8 +30,8 @@ public class MenuService {
             System.out.println("Item not found");
             return;
         }
-
         menu.remove(id);
+        System.out.println("Item removed");
     }
 
     public MenuItem getItem(int id) {

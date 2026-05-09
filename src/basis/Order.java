@@ -42,6 +42,7 @@ public class Order {
                 items.remove(i);
                 break;
             }
+            System.out.println("Item removed");
         }
     }
 
@@ -53,6 +54,7 @@ public class Order {
         }
 
         items.add(new OrderItem(item, quantity));
+        System.out.println("Item added");
     }
 
     public void close() {
@@ -67,7 +69,6 @@ public class Order {
 
         double total = 0;
         for (OrderItem item : items) {
-
             total += item.getTotal();
 
         }
