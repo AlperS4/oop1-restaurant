@@ -44,12 +44,10 @@ public class MenuItem {
 
     @Override
     public String toString() {
-        return "basis.MenuItem{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", category=" + category +
-                ", price=" + price +
-                ", stock=" + stock +
-                '}';
+        return  "id=" + id +
+                "name='" + name +
+                "category=" + category +
+                "price=" + price +
+                "stock=" + stock;
     }
 }
