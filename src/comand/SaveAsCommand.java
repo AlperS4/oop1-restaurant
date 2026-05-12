@@ -1,8 +1,8 @@
 package comand;
 
-public class CloseCommand implements Command {
+public class SaveAsCommand implements Command {
     @Override
     public void execute(String[] args, CommandContext ctx) {
-        ctx.fileManager.close();
+        ctx.fileManager.saveAs(args[1]);
     }
 }

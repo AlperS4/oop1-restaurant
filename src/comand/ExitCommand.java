@@ -1,8 +1,8 @@
 package comand;
 
-public class CloseCommand implements Command {
+public class ExitCommand implements Command {
     @Override
     public void execute(String[] args, CommandContext ctx) {
-        ctx.fileManager.close();
+        System.exit(0);
     }
 }
