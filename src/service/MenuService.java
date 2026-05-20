@@ -6,6 +6,9 @@ import exeption.ItemNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Управлява менюто на ресторанта
+ */
 public class MenuService {
 
     private Map<Integer, MenuItem> menu;
@@ -14,26 +17,42 @@ public class MenuService {
         menu = new HashMap<>();
     }
 
-    public void addItem(MenuItem item) {
+    /**
+     * Добавя артикул в менюто
+     *
+     * @param item артикул
+     */
+    public String addItem(MenuItem item) {
 
         if (menu.containsKey(item.getId())) {
-            System.out.println("Item already exists");
-            return;
+            return "Item already exists";
         }
         menu.put(item.getId(), item);
-        System.out.println("Item added");
+
+        return "Item added";
     }
 
-    public void removeItem(int id) {
+    /**
+     * Премахва артикул от менюто
+     *
+     * @param id ID на артикула
+     */
+    public String removeItem(int id) {
 
         if (!menu.containsKey(id)) {
-            System.out.println("Item not found");
-            return;
+            return "Item not found";
         }
         menu.remove(id);
-        System.out.println("Item removed");
+
+        return "Item removed";
     }
 
+    /**
+     * Връща артикул по ID
+     *
+     * @param id ID на артикула
+     * @return намерения артикул
+     */
     public MenuItem getItem(int id) {
 
         MenuItem item = menu.get(id);
@@ -43,15 +62,17 @@ public class MenuService {
         return item;
     }
 
-    public void printMenu() {
+    /**
+     * Принтира всички артикули от менюто
+     */
+    public String printMenu() {
 
         if (menu.isEmpty()) {
-            System.out.println("Menu is empty");
-            return;
+            return "Menu is empty";
         }
-
         for (MenuItem item : menu.values()) {
-            System.out.println(item);
+            return item.toString();
         }
+        return "Menu is empty";
     }
 }

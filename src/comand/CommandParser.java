@@ -2,6 +2,9 @@ package comand;
 
 import java.util.*;
 
+/**
+ * Чете и изпълнява командите от потребителя
+ */
 public class CommandParser {
 
     private Map<CommandType, Command> commands = new HashMap<>();
@@ -12,6 +15,9 @@ public class CommandParser {
         register();
     }
 
+    /**
+     * Регистрира всички команди
+     */
     private void register() {
 
         commands.put(CommandType.OPEN, new OpenCommand());
@@ -42,40 +48,30 @@ public class CommandParser {
         commands.put(CommandType.EXIT, new ExitCommand());
     }
 
-    public void start() {
+    /**
+     * Стартира command line интерфейса
+     */
+    public String start(String input) {
 
-        Scanner sc = new Scanner(System.in);
+        String[] parts = input.split(" ");
+        CommandType type;
 
-        while (true) {
+        try {
+            type = CommandType.fromString(parts[0]);
+        } catch (Exception e) {
+            return "Unknown command";
+        }
 
-            System.out.print("> ");
-            String input = sc.nextLine();
-
-            String[] parts = input.split(" ");
-
-            CommandType type;
-
-            try {
-                type = CommandType.fromString(parts[0]);
-            } catch (Exception e) {
-                System.out.println("Unknown command");
-                continue;
-            }
-
-            if (!ctx.fileData.isLoaded()
-                    && type != CommandType.OPEN
-                    && type != CommandType.HELP
-                    && type != CommandType.EXIT) {
-
-                System.out.println("No file opened");
-                continue;
-            }
-
-            try {
-                commands.get(type).execute(parts, ctx);
-            } catch (Exception e) {
-                System.out.println("Error executing command");
-            }
+        if (!ctx.fileData.isLoaded()
+                && type != CommandType.OPEN
+                && type != CommandType.HELP
+                && type != CommandType.EXIT) {
+            return "No file opened";
+        }
+        try {
+            return commands.get(type).execute(parts, ctx);
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 }

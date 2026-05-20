@@ -2,6 +2,9 @@ package basis;
 
 import enums.Category;
 
+/**
+ * Представя артикул от менюто
+ */
 public class MenuItem {
 
     private int id;
@@ -10,6 +13,15 @@ public class MenuItem {
     private double price;
     private int stock;
 
+    /**
+     * Създава нов артикул
+     *
+     * @param id уникално ID
+     * @param name име
+     * @param category категория
+     * @param price цена
+     * @param stock наличност
+     */
     public MenuItem(int id, String name, Category category, double price, int stock) {
         this.id = id;
         this.name = name;
@@ -44,10 +56,10 @@ public class MenuItem {
 
     @Override
     public String toString() {
-        return  "id=" + id +
-                "name='" + name +
-                "category=" + category +
-                "price=" + price +
-                "stock=" + stock;
+        return  "id= " + id +
+                " name = " + name +
+                " category = " + category +
+                " price = " + price +
+                " stock = " + stock;
     }
 }

@@ -1,8 +1,11 @@
 package comand;
 
+/**
+ * Команда за записване в нов файл
+ */
 public class SaveAsCommand implements Command {
     @Override
-    public void execute(String[] args, CommandContext ctx) {
-        ctx.fileManager.saveAs(args[1]);
+    public String execute(String[] args, CommandContext ctx) {
+       return ctx.fileManager.saveAs(args[1]);
     }
 }

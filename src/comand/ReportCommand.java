@@ -1,8 +1,11 @@
 package comand;
 
+/**
+ * Команда за отчет
+ */
 public class ReportCommand implements Command {
     @Override
-    public void execute(String[] a, CommandContext ctx) {
-        ctx.reportService.report();
+    public String execute(String[] a, CommandContext ctx) {
+       return ctx.reportService.report();
     }
 }

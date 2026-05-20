@@ -1,8 +1,11 @@
 package comand;
 
+/**
+ * Команда за премахване на маса
+ */
 public class RemoveTableCommand implements Command {
     @Override
-    public void execute(String[] a, CommandContext ctx) {
-        ctx.tableService.removeTable(Integer.parseInt(a[1]));
+    public String execute(String[] a, CommandContext ctx) {
+       return ctx.tableService.removeTable(Integer.parseInt(a[1]));
     }
 }

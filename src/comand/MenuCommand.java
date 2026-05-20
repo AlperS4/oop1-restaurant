@@ -1,8 +1,11 @@
 package comand;
 
+/**
+ * Команда за показване на менюто
+ */
 public class MenuCommand implements Command {
     @Override
-    public void execute(String[] a, CommandContext ctx) {
-        ctx.menuService.printMenu();
+    public String execute(String[] a, CommandContext ctx) {
+       return ctx.menuService.printMenu();
     }
 }

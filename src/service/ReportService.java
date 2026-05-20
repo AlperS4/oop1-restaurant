@@ -6,6 +6,9 @@ import enums.OrderStatus;
 
 import java.util.*;
 
+/**
+ * Генерира отчети за ресторанта
+ */
 public class ReportService {
 
     private OrderService orderService;
@@ -14,7 +17,10 @@ public class ReportService {
         this.orderService = orderService;
     }
 
-    public void topItems() {
+    /**
+     * Показва най-продаваните артикули
+     */
+    public String topItems() {
 
         Map<String, Integer> count = new HashMap<>();
 
@@ -30,28 +36,29 @@ public class ReportService {
                 }
             }
         }
-
         if (count.isEmpty()) {
-            System.out.println("No sales yet");
-            return;
+            return "No sales yet";
         }
 
         while (!count.isEmpty()) {
-
             String bestItem = null;
             int max = 0;
+
             for (Map.Entry<String, Integer> entry : count.entrySet()) {
                 if (entry.getValue() > max) {
                     max = entry.getValue();
                     bestItem = entry.getKey();
                 }
             }
-            System.out.println(bestItem + " sold: " + max);
-            count.remove(bestItem);
+            return bestItem +  " sold: " + max;
         }
+        return "All sold";
     }
 
-    public void report() {
+    /**
+     * Генерира отчет за общия приход
+     */
+    public String report() {
 
         double total = 0;
         for (Order order : orderService.getAllOrders()) {
@@ -59,6 +66,6 @@ public class ReportService {
                 total += order.getTotal();
             }
         }
-        System.out.println("Total revenue: " + total);
+        return "Total revenue: " + total;
     }
 }

@@ -1,8 +1,11 @@
 package comand;
 
+/**
+ * Команда за най-продавани артикули
+ */
 public class TopItemsCommand implements Command {
     @Override
-    public void execute(String[] a, CommandContext ctx) {
-        ctx.reportService.topItems();
+    public String execute(String[] a, CommandContext ctx) {
+      return ctx.reportService.topItems();
     }
 }

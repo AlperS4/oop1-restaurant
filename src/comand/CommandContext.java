@@ -3,6 +3,9 @@ package comand;
 import service.*;
 import file.*;
 
+/**
+ * Съдържа всички services и shared обекти
+ */
 public class CommandContext {
 
     public MenuService menuService;

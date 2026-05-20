@@ -1,8 +1,11 @@
 package comand;
 
+/**
+ * Команда за показване на масите
+ */
 public class TablesCommand implements Command {
     @Override
-    public void execute(String[] a, CommandContext ctx) {
-        ctx.tableService.printTables();
+    public String execute(String[] a, CommandContext ctx) {
+       return ctx.tableService.printTables();
     }
 }

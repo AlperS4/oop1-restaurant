@@ -1,8 +1,12 @@
 package comand;
 
+/**
+ * Команда за излизане от програмата
+ */
 public class ExitCommand implements Command {
     @Override
-    public void execute(String[] args, CommandContext ctx) {
+    public String execute(String[] args, CommandContext ctx) {
         System.exit(0);
+        return "";
     }
 }

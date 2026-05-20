@@ -1,76 +1,57 @@
 package basis;
 
-import enums.OrderStatus;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Order {
-
-    private int id;
-    private int tableNumber;
-    private List<OrderItem> items;
-    private OrderStatus status;
+/**
+ * Представя поръчка
+ */
+public class Order extends AbstractOrder {
 
     public Order(int id, int tableNumber) {
-        this.id = id;
-        this.tableNumber = tableNumber;
-        this.items = new ArrayList<>();
-        this.status = OrderStatus.OPEN;
-
+        super(id, tableNumber);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public int getTableNumber() {
-        return tableNumber;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public void removeItem(int itemId) {
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getItem().getId() == itemId) {
-                items.remove(i);
-                break;
+    /**
+     * Премахва артикул от поръчката
+     *
+     * @param itemId ID на артикула
+     * @return резултат
+     */
+    public String removeItem(int itemId) {
+        for (int i = 0; i < getItems().size(); i++) {
+            if (getItems().get(i).getItem().getId() == itemId) {
+                getItems().remove(i);
+                return "Item removed";
             }
-            System.out.println("Item removed");
         }
+        return "Item not found";
     }
 
-    public void addItem(MenuItem item, int quantity) {
-
+    /**
+     * Добавя артикул към поръчката
+     *
+     * @param item артикул
+     * @param quantity количество
+     * @return резултат
+     */
+    public String addItem(MenuItem item, int quantity) {
         if (item == null) {
-            System.out.println("Item not found");
-            return;
+            return "Item not found";
         }
+        getItems().add(new OrderItem(item, quantity));
 
-        items.add(new OrderItem(item, quantity));
-        System.out.println("Item added");
+        return "Item added";
     }
 
-    public void close() {
-        status = OrderStatus.PAID;
-    }
-
-    public void cancel() {
-        status = OrderStatus.CANCELED;
-    }
-
+    /**
+     * Изчислява общата сума
+     *
+     * @return обща сума
+     */
+    @Override
     public double getTotal() {
-
         double total = 0;
-        for (OrderItem item : items) {
-            total += item.getTotal();
 
+        for (OrderItem item : getItems()) {
+            total += item.getTotal();
         }
         return total;
     }

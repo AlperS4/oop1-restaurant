@@ -6,41 +6,53 @@ import enums.TableStatus;
 import exeption.OrderNotFoundException;
 import java.util.*;
 
+/**
+ * Управлява поръчките
+ */
 public class OrderService {
 
     private Map<Integer, Order> orders = new HashMap<>();
     private int nextId = 1;
     private TableService tableService;
 
+
     public OrderService(TableService tableService) {
         this.tableService = tableService;
     }
 
-    public Order openOrder(int tableNumber) {
-
+    /**
+     * Отваря нова поръчка
+     *
+     * @param tableNumber номер на масата
+     * @return нова поръчка
+     */
+    public String openOrder(int tableNumber) {
         for (Order o : orders.values()) {
-            if (o.getTableNumber() == tableNumber &&
-                    o.getStatus() == OrderStatus.OPEN) {
-
-                System.out.println("Table already has active order");
-                return null;
+            if (o.getTableNumber() == tableNumber
+                    && o.getStatus() == OrderStatus.OPEN) {
+                return "Table already has active order";
             }
         }
 
         Table table = tableService.getTable(tableNumber);
         if (table == null) {
-            System.out.println("Table not found");
-            return null;
+            return "Table not found";
         }
 
         table.setStatus(TableStatus.OCCUPIED);
 
         Order order = new Order(nextId++, tableNumber);
         orders.put(order.getId(), order);
-        System.out.println("Order " + order.getId() + " opened");
-        return order;
+
+        return "Order " + order.getId() + " opened";
     }
 
+    /**
+     * Връща поръчка по ID
+     *
+     * @param id ID на поръчката
+     * @return намерената поръчка
+     */
     public Order getOrder(int id) {
 
         Order order = orders.get(id);
@@ -50,17 +62,20 @@ public class OrderService {
         return order;
     }
 
-    public void closeOrder(int id) {
+    /**
+     * Затваря поръчка
+     *
+     * @param id ID на поръчката
+     */
+    public String closeOrder(int id) {
 
         Order order = orders.get(id);
         if (order == null) {
-            System.out.println("Order not found");
-            return;
+            return"Order not found";
         }
 
         if (order.getStatus() != OrderStatus.OPEN) {
-            System.out.println("Order is not active");
-            return;
+            return "Order is not active";
         }
         order.close();
 
@@ -68,21 +83,23 @@ public class OrderService {
         if (table != null) {
             table.setStatus(TableStatus.FREE);
         }
-
-        System.out.println("Order closed");
+        return "Order closed";
     }
 
-    public void cancelOrder(int id) {
+    /**
+     * Анулира поръчка
+     *
+     * @param id ID на поръчката
+     */
+    public String cancelOrder(int id) {
 
         Order order = orders.get(id);
         if (order == null) {
-            System.out.println("Order not found");
-            return;
+            return "Order not found";
         }
 
         if (order.getStatus() != OrderStatus.OPEN) {
-            System.out.println("Order is not active");
-            return;
+            return "Order is not active";
         }
         order.cancel();
 
@@ -90,22 +107,29 @@ public class OrderService {
         if (table != null) {
             table.setStatus(TableStatus.FREE);
         }
-        System.out.println("Order canceled");
+        return "Order canceled";
     }
 
-    public void printOrders() {
+    /**
+     * Принтира всички поръчки
+     */
+    public String printOrders() {
 
         if (orders.isEmpty()) {
-            System.out.println("No orders");
-            return;
+            return "No orders";
         }
 
         for (Order o : orders.values()) {
-            System.out.println("Order: " + o.getId() +"Table: " + o.getTableNumber() + "Status: " + o.getStatus()
-            );
+            return "Order: " + o.getId() +"Table: " + o.getTableNumber() + "Status: " + o.getStatus();
         }
+        return "No orders";
     }
 
+    /**
+     * Връща всички поръчки
+     *
+     * @return колекция с всички поръчки
+     */
     public Collection<Order> getAllOrders() {
         return orders.values();
     }

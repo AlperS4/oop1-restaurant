@@ -2,12 +2,17 @@ package comand;
 
 import basis.Order;
 
+/**
+ * Команда за показване на поръчка
+ */
 public class ShowOrderCommand implements Command {
     @Override
-    public void execute(String[] a, CommandContext ctx) {
-
+    public String execute(String[] a, CommandContext ctx) {
         Order o = ctx.orderService.getOrder(Integer.parseInt(a[1]));
-        o.getItems().forEach(i -> System.out.println(i.getItem().getName() + " x " + i.getQuantity()));
-        System.out.println("Total: " + o.getTotal());
+
+        StringBuilder sb = new StringBuilder();
+        o.getItems().forEach(i -> sb.append(i.getItem().getName() + " x " + i.getQuantity()));
+        sb.append(" Total: ").append(o.getTotal());
+        return sb.toString();
     }
 }

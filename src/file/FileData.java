@@ -1,9 +1,13 @@
 package file;
 
+/**
+ * Съдържа информация за текущо отворения файл
+ */
 public class FileData {
 
     private boolean loaded;
     private String filePath;
+
 
     public boolean isLoaded() {
         return loaded;
@@ -21,6 +25,9 @@ public class FileData {
         this.filePath = filePath;
     }
 
+    /**
+     * Изчиства информацията за текущия файл
+     */
     public void clear() {
         this.filePath = null;
         this.loaded = false;

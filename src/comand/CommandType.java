@@ -1,5 +1,8 @@
 package comand;
 
+/**
+ * Enum с всички поддържани команди
+ */
 public enum CommandType {
 
     OPEN,
@@ -24,6 +27,13 @@ public enum CommandType {
     HELP,
     EXIT;
 
+    /**
+     * Преобразува текст в CommandType
+     *
+     * @param input въведена команда
+     * @return съответния CommandType
+     * @throws IllegalArgumentException при невалидна команда
+     */
     public static CommandType fromString(String input) {
         return switch (input.toLowerCase()) {
 
