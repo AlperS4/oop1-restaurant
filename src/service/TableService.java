@@ -65,9 +65,11 @@ public class TableService {
             return "No tables";
         }
 
+        StringBuilder sb = new StringBuilder();
         for (Table t : tables.values()) {
-            return "Table: " + t.getNumber() + "Seats: " + t.getSeats() + "Status: " + t.getStatus();
+            sb.append("Table: ").append(t.getNumber()).append(" | Seats: ").append(t.getSeats())
+                    .append(" | Status: ").append(t.getStatus()).append("\n");
         }
-        return "Tables printed";
+        return sb.toString();
     }
 }

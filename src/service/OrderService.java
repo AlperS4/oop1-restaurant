@@ -114,15 +114,16 @@ public class OrderService {
      * Принтира всички поръчки
      */
     public String printOrders() {
-
         if (orders.isEmpty()) {
             return "No orders";
         }
 
+        StringBuilder sb = new StringBuilder();
         for (Order o : orders.values()) {
-            return "Order: " + o.getId() +"Table: " + o.getTableNumber() + "Status: " + o.getStatus();
+            sb.append("Order ID: ").append(o.getId()).append(" Table: ").append(o.getTableNumber())
+                    .append(" Status: ").append(o.getStatus()).append("\n");
         }
-        return "No orders";
+        return sb.toString();
     }
 
     /**

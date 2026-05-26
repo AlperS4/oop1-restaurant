@@ -66,13 +66,14 @@ public class MenuService {
      * Принтира всички артикули от менюто
      */
     public String printMenu() {
-
         if (menu.isEmpty()) {
             return "Menu is empty";
         }
+
+        StringBuilder sb = new StringBuilder();
         for (MenuItem item : menu.values()) {
-            return item.toString();
+            sb.append(item.toString()).append("\n");
         }
-        return "Menu is empty";
+        return sb.toString();
     }
 }
