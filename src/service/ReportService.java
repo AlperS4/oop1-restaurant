@@ -21,12 +21,10 @@ public class ReportService {
      * Показва най-продаваните артикули
      */
     public String topItems() {
-
         Map<String, Integer> count = new HashMap<>();
 
         for (Order order : orderService.getAllOrders()) {
             for (OrderItem item : order.getItems()) {
-
                 String name = item.getItem().getName();
                 if (!count.containsKey(name)) {
                     count.put(name, item.getQuantity());
@@ -40,19 +38,21 @@ public class ReportService {
             return "No sales yet";
         }
 
-        while (!count.isEmpty()) {
-            String bestItem = null;
-            int max = 0;
+        String bestItem = null;
+        int max = 0;
 
-            for (Map.Entry<String, Integer> entry : count.entrySet()) {
-                if (entry.getValue() > max) {
-                    max = entry.getValue();
-                    bestItem = entry.getKey();
-                }
+        for (Map.Entry<String, Integer> entry : count.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                bestItem = entry.getKey();
             }
-            return bestItem +  " sold: " + max;
         }
-        return "All sold";
+
+        if (bestItem == null) {
+            return "No sales yet";
+        }
+
+        return bestItem + " sold: " + max;
     }
 
     /**
