@@ -41,10 +41,12 @@ public class ReportService {
         String bestItem = null;
         int max = 0;
 
-        for (Map.Entry<String, Integer> entry : count.entrySet()) {
-            if (entry.getValue() > max) {
-                max = entry.getValue();
-                bestItem = entry.getKey();
+        for (String name : count.keySet()) {
+            int quantity = count.get(name);
+
+            if (quantity > max) {
+                max = quantity;
+                bestItem = name;
             }
         }
 
