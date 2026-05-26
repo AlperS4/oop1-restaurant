@@ -27,7 +27,6 @@ public class HelpCommand implements Command {
                 "orders \n" +
                 "report \n" +
                 "topitems \n" +
-                "help \n" +
                 "exit";
     }
 }
