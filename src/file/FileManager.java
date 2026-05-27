@@ -3,13 +3,13 @@ package file;
 import basis.MenuItem;
 import basis.Order;
 import basis.Table;
+import enums.Category;
+import enums.OrderStatus;
 import service.MenuService;
 import service.OrderService;
 import service.TableService;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 
 /**
  * Управлява работа с файлове
@@ -37,11 +37,69 @@ public class FileManager {
     public String open(String path) {
 
         try {
+
             File file = new File(path);
 
             if (!file.exists()) {
                 file.createNewFile();
             }
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String section = "";
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                if (line.equals("MENU") || line.equals("TABLES") || line.equals("ORDERS")) {
+                    section = line;
+                    continue;
+                }
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                String[] parts = line.split(",");
+                if (section.equals("MENU")) {
+
+                    int id = Integer.parseInt(parts[0]);
+                    String name = parts[1];
+                    Category category = Category.valueOf(parts[2]);
+                    double price = Double.parseDouble(parts[3]);
+                    int stock = Integer.parseInt(parts[4]);
+
+                    menuService.addItem(new MenuItem(id, name, category, price, stock));
+                }
+
+                else if (section.equals("TABLES")) {
+
+                    int number = Integer.parseInt(parts[0]);
+                    int seats = Integer.parseInt(parts[1]);
+
+                    tableService.addTable(number, seats);
+                }
+
+                else if (section.equals("ORDERS")) {
+
+                    int id = Integer.parseInt(parts[0]);
+                    int tableNumber = Integer.parseInt(parts[1]);
+
+                    OrderStatus status = OrderStatus.valueOf(parts[2]);
+
+                    Order order = new Order(id, tableNumber);
+
+                    if (status == OrderStatus.PAID) {
+                        order.close();
+                    }
+
+                    if (status == OrderStatus.CANCELED) {
+                        order.cancel();
+                    }
+
+                    orderService.getOrders().put(id, order);
+                }
+            }
+
+            br.close();
 
             fileData.setFilePath(path);
             fileData.setLoaded(true);
@@ -49,6 +107,7 @@ public class FileManager {
             return "Successfully opened " + path;
 
         } catch (Exception e) {
+
             return "Error opening file";
         }
     }

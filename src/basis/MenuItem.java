@@ -55,7 +55,7 @@ public class MenuItem {
     }
 
     public String toFileString() {
-        return id + ", " + name + ", " + category + ", " + price + ", " + stock;
+        return id + "," + name + "," + category + "," + price + "," + stock;
     }
 
     @Override
