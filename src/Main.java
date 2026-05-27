@@ -15,7 +15,7 @@ public class Main {
         ReportService rs = new ReportService(os);
 
         FileData fd = new FileData();
-        FileManager fm = new FileManager(fd);
+        FileManager fm = new FileManager(fd, ms, ts, os);
 
         CommandContext ctx = new CommandContext(ms, ts, os, rs, fm, fd);
 

@@ -54,6 +54,10 @@ public class MenuItem {
         this.stock = stock;
     }
 
+    public String toFileString() {
+        return id + ", " + name + ", " + category + ", " + price + ", " + stock;
+    }
+
     @Override
     public String toString() {
         return  "id= " + id +

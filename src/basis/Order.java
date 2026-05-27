@@ -9,6 +9,10 @@ public class Order extends AbstractOrder {
         super(id, tableNumber);
     }
 
+    public String toFileString() {
+        return getId() + ", " + getTableNumber() + ", " + getStatus();
+    }
+
     /**
      * Премахва артикул от поръчката
      *

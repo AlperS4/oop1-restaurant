@@ -20,6 +20,10 @@ public class OrderService {
         this.tableService = tableService;
     }
 
+    public Map<Integer, Order> getOrders() {
+        return orders;
+    }
+
     /**
      * Отваря нова поръчка
      *

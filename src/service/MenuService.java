@@ -17,6 +17,10 @@ public class MenuService {
         menu = new HashMap<>();
     }
 
+    public Map<Integer, MenuItem> getMenu() {
+        return menu;
+    }
+
     /**
      * Добавя артикул в менюто
      *

@@ -1,5 +1,12 @@
 package file;
 
+import basis.MenuItem;
+import basis.Order;
+import basis.Table;
+import service.MenuService;
+import service.OrderService;
+import service.TableService;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,9 +17,15 @@ import java.io.FileWriter;
 public class FileManager {
 
     private FileData fileData;
+    private MenuService menuService;
+    private TableService tableService;
+    private OrderService orderService;
 
-    public FileManager(FileData fileData) {
-        this.fileData = fileData;
+    public FileManager(FileData fd, MenuService menuService, TableService tableService, OrderService orderService) {
+        this.fileData = fd;
+        this.menuService = menuService;
+        this.tableService = tableService;
+        this.orderService = orderService;
     }
 
     /**
@@ -59,10 +72,30 @@ public class FileManager {
     public String save() {
 
         if (!fileData.isLoaded()) {
-            return "No file is open";
+            return "No file opened";
         }
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileData.getFilePath()))) {
+
+            bw.write("MENU\n");
+            for (MenuItem item : menuService.getMenu().values()) {
+                bw.write(item.toFileString());
+                bw.newLine();
+            }
+
+            bw.write("TABLES\n");
+            for (Table table : tableService.getTables().values()) {
+
+                bw.write(table.toFileString());
+                bw.newLine();
+            }
+
+            bw.write("ORDERS\n");
+            for (Order order : orderService.getOrders().values()) {
+
+                bw.write(order.toFileString());
+                bw.newLine();
+            }
             return "Successfully saved";
 
         } catch (Exception e) {

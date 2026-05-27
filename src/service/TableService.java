@@ -13,6 +13,10 @@ public class TableService {
 
     private Map<Integer, Table> tables = new HashMap<>();
 
+    public Map<Integer, Table> getTables() {
+        return tables;
+    }
+
     /**
      * Добавя нова маса.
      *

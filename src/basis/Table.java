@@ -39,4 +39,8 @@ public class Table {
     public void setStatus(TableStatus status) {
         this.status = status;
     }
+
+    public String toFileString() {
+        return number + "," + seats + "," + status;
+    }
 }
