@@ -13,6 +13,6 @@ public class AddToOrderCommand implements Command {
         MenuItem item = ctx.menuService.getItem(Integer.parseInt(a[2]));
         o.addItem(item, Integer.parseInt(a[3]));
 
-        return "Successfully added ";
+        return "";
     }
 }
