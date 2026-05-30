@@ -19,7 +19,6 @@ public abstract class AbstractOrder {
 
         this.id = id;
         this.tableNumber = tableNumber;
-
         items = new ArrayList<>();
         status = OrderStatus.OPEN;
     }
